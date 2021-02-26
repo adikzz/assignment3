@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Books</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 26pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        #buttonAsLink {
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            font-family: "Times New Roman";
+            font-size: 16px;
+            padding: 0;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+        }
+        .inputs{
+            width: 80%;
+            padding-bottom: 2px;
+        }
+        body{
+            margin: 0;
+            background-color: #3a55b8;
+        }
+        #grid-box{
+            display: grid;grid-template-columns: auto auto auto;
+        }
+    </style>
+</head>
+<body style="margin: 0;background-color: #3a55b8;">
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a th:href="@{/books/addBook}">Add New Book</a>
+</div>
+<div id="grid-box">
+    <div th:each="book:${booksList}" style="border: 3px solid #000000;background-color: #38b1d6;padding: 5%;">
+        <table style="width: 100%;" id=${book.getId()}/>
+            <tr>
+                <td class="actions">
+                    <div style="display:flex;flex-direction:row;">
+                        <input style="width: 100%" type="hidden" name="bookId" value=${book.getId()} />
+                        <a th:href="@{/books/edit/{id}(id=${book.getId()})}">Edit Book</a>
+                        <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+                            <input id="buttonAsLink" type="submit" value="Delete Book" />
+                        </form>
+                    </div>
+                </td>
+                <td style="width:40%" rowspan="6"><img th:src="${book.getImageURL()}" width="178px" height="242px" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="stats">ISBN:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="inputs" type="text" name="bookId" placeholder="book id" readonly th:value="${book.getId()}" />
+                    </br>
+                    <p class="stats">Title:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="inputs" type="text" name="bookName" placeholder="book name" readonly th:value="${book.getName()}" />
+                    </br>
+                    <p class="stats">Author:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="inputs" type="text" name="bookAuthor" placeholder="book author" readonly th:value="${book.getAuthor()}" />
+                    </br>
+                    <p class="stats">Genre:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="inputs" type="text" name="bookGenre" placeholder="book genre" readonly th:value="${book.getGenre()}" />
+                    </br>
+                    <p class="stats">Available:</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input class="inputs" type="text" name="bookCopies" placeholder="book copies" readonly th:value="${book.getCopies()}" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

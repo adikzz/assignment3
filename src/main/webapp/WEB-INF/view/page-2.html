@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <style>
+        . {
+            font-size: 14px;
+        }
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="margin: 0;background-color: #3a55b8;">
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a href="/books">Books</a>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:space-around;border: 3px solid #000000;background-color: #38b1d6;padding: 5%;">
+    <center>
+    <h1 style="color: #F38181; font-size: 40pt; -webkit-text-stroke: 2px rgb(0,0,0); margin-top:0;">Book Info</h1>
+    <p class="stats">- ISBN: -</p>
+    <input class="inputs" type="text" name="bookId" placeholder="book id" readonly th:value="${book.getId()}" /><br/>
+
+    <p class="stats">- Name: -</p>
+    <input class="inputs" type="text" name="bookName" placeholder="book name" readonly th:value="${book.getName()}" /><br/>
+
+    <p class="stats">- Author: -</p>
+    <input class="inputs" type="text" name="bookAuthor" placeholder="book author" readonly th:value="${book.getAuthor()}" /><br/>
+
+    <p class="stats">- Genre: -</p>
+    <input class="inputs" type="text" name="bookGenre" placeholder="book genre" readonly th:value="${book.getGenre()}" /><br/>
+
+    <p class="stats">- Copies: -</p>
+    <input class="inputs" type="text" name="bookCopies" placeholder="book copies" readonly th:value="${book.getCopies()}" /><br/>
+
+    <p class="stats">- Image: -</p>
+    <img th:src="${book.getImageURL()}" width="128px" height="192px" />
+    </center>
+</div>
+</body>
+</html>

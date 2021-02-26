@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        .text{
+            color: #000000;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #F38181;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        body{
+            margin: 0;
+            background-color: #3a55b8;
+        }
+        #h{
+            text-align: center;color: antiquewhite; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        #box{
+            background-color: #8ec2e6;
+            padding-left: 25%;
+        }
+        #box input{
+            border-radius: 5px;
+            padding: 5px;
+            background-color: #ffffff;
+            color: #000000;
+            font-size: 2vw;
+        }
+    </style>
+</head>
+<body>
+<h1 id="h">Sign In</h1>
+<div id="box">
+    <form action="/login" method="post">
+        <div style="display: grid;grid-template-columns: auto auto;font-size: 4vw;grid-gap: 5px;padding-top: 5px;">
+            <div class="text">User Name:</div><div class="input"><input type="text" name="username"/></div>
+            <div class="text">Password:</div><div class="input"><input type="password" name="password"/></div>
+            <div><input type="submit" value="Sign In" style="background-color: #ffffff;color: black;font-size: 2vw;"/></div>
+            <div><a href="/home"><input type="button" value="Home"/></a></div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

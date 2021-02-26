@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New User</title>
+    <style>
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        #buttonAsLink {
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            font-family: "Times New Roman";
+            font-size: 16px;
+            padding: 0;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+            font-size: 2vw;
+            margin: 0;
+        }
+        .inputs{
+            width: 80%;
+            padding-bottom: 2px;
+        }
+        .h{
+            text-align: center;color: white; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        body{
+            margin: 0;
+            background-color: #3a55b8;
+        }
+        .flex-box{
+            display: flex;flex-direction: column;padding-left: 10%;padding-right: 10%;
+        }
+        .flex-box input{
+            font-size: 2vw;
+            background-color: #ffffff;color: black;
+        }
+        .text{
+            color: #000000;
+            font-size: 4vw;
+            -webkit-text-stroke: 1px rgb(0,0,0);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a th:href="@{/users}">Users List</a>
+</div>
+<h1 class="h">Add New User</h1>
+<div class="flex-box">
+    <p style="color:red" th:text="${message}">message</p>
+    <form action="/registration" method="post">
+        <div class="text">User Name:</div><div class="input"><input type="text" name="username"/></div>
+        <div class="text">name:</div><div class="input"><input type="text" name="name"/></div>
+        <div class="text">Password:</div><div class="input"><input type="password" name="password"/></div>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        <div><input type="submit" value="Sign Up"/></div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <style>
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 26pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        #buttonAsLink {
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+            font-family: "Times New Roman";
+            font-size: 16px;
+            padding: 0;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+            font-size: 2vw;
+            margin: 0;
+        }
+        .inputs{
+            width: 80%;
+            padding-bottom: 2px;
+        }
+        .h{
+            text-align: center;color: antiquewhite; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        body{
+            margin: 0;
+            background-color: #3a55b8;
+        }
+        .flex-box{
+            display: flex;flex-direction: column;padding-left: 10%;padding-right: 10%;
+        }
+        .flex-box input{
+            font-size: 2vw;
+            background-color: #ffffff;color: black;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a th:href="@{/users}">Users List</a>
+</div>
+<h1 class="h">User Info</h1>
+<div class="flex-box">
+    <div><p class="stats">Email:</p><input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /></div>
+    <div><p class="stats">Name:</p><input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" /></div>
+    <div><p class="stats">Role:</p><input type="text" name="role" placeholder="Role" readonly  th:value="${user.getRole().getName()}" /></div><br>
+    <div style="display: flex;">
+        <div><a th:href="@{/users/edit/{id}(id=${user.getId()})}"><input type="button" value="Edit User"/></a></div>
+        <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${user}">
+            <input style="cursor: pointer;font-size: 2vw;background-color: #ffffff;color: #000000;" type="submit" value="Delete User" />
+        </form>
+    </div>
+</div>
+<hr>
+<h1 class="h">Books List</h1>
+<div class="flex-box">
+    <form th:method="PUT" th:action="@{/users/{id}(id=${user.getId()})}" th:object="${borrowing}">
+        <input type="text" name="book_id" placeholder="book id" th:field="*{book_id}" /><br/>
+        <input type="submit" value="Add Book" />
+    </form>
+    <div th:each="borrowing:${borrowingList}">
+        <span>ISBN: </span><input type="text" name="book" placeholder="book id" readonly th:value="${borrowing.getBook_id()}" /><br/>
+        <form th:method="DELETE" th:action="@{/users/{id1}/{id2}(id1=${user.getId()}, id2=${borrowing.getId()})}" th:object="${borrowing}">
+            <input type="submit" value="Return Book" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

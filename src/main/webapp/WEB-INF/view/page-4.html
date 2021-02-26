@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book Info</title>
+    <style>
+        . {
+            font-size: 14px;
+        }
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 30pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .stats{
+            color: #F9ED68;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="margin: 0;background-color: #3a55b8;">
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+    <a href="/books">Books</a>
+</div>
+<div style="display:flex;flex-direction:column;justify-content:space-around;border: 3px solid #000000;background-color: #3a55b8;padding: 5%;">
+    <h1 style="color: #F38181; font-size: 40pt; -webkit-text-stroke: 2px rgb(0,0,0); margin-top:0;">Edit Book Info</h1>
+    <form th:method="PATCH" th:action="@{/books/{id}(id=${book.getId()})}" th:object="${book}">
+        <p class="stats">- Name: -</p>
+        <input type="text" th:field="*{name}" id="name" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div><br/>
+        <p class="stats">- Author: -</p>
+        <input type="text" th:field="*{author}" id="author" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div><br/>
+        <p class="stats">- Genre: -</p>
+        <input type="text" th:field="*{genre}" id="genre" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">Genre Error</div><br/>
+        <p class="stats">- Image URL: -</p>
+        <input type="text" th:field="*{imageURL}" id="imageURL" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}">imageURL Error</div><br/>
+        <p class="stats">- Copies: -</p>
+        <input type="text" th:field="*{copies}" id="copies" /><br/>
+        <div style="color:red" th:if="${#fields.hasErrors('copies')}" th:errors="*{copies}">Copies Error</div><br/>
+        <input type="submit" value="Update Book Info" />
+    </form>
+</div>
+</body>
+</html>

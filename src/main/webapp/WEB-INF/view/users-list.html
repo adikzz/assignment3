@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #header{
+            display: flex;
+            background-color: #8ec2e6;
+            width: 100%;
+            height: 5%;
+            justify-content: space-around;
+        }
+        #header a{
+            color: #000000;
+            font-size: 26pt;
+            -webkit-text-stroke: 2px rgb(0,0,0);
+            text-decoration: none;
+        }
+        .actions a{
+            color: #990e0e;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right:10px;
+        }
+        .stats{
+            color: #B83A5D;
+            font-weight: bold;
+            margin-bottom:0;
+        }
+        body{
+            margin: 0;
+            background-color: #3a55b8;
+        }
+        #h{
+            text-align: center;color: antiquewhite; font-size: 4vw;-webkit-text-stroke: 0.5px rgb(0,0,0);
+        }
+        #grid-box{
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            padding-left: 10%;
+            padding-right: 10%;
+            grid-gap: 10px;
+        }
+        #box{
+            background-color: #8ec2e6;border-radius: 25px;padding-left: 25%;
+        }
+        #box input{
+            border-radius: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="header">
+    <a href="/logout">Log Out</a>
+    <a href="/home">Home</a>
+</div>
+<h1 id="h">List of Students:</h1>
+<div  id="grid-box">
+    <div id="box" th:each="user:${usersList}">
+        <p class="stats">Email:</p>
+        <input type="text" name="email" placeholder="Email" readonly th:value="${user.getEmail()}" /><br/>
+        <p class="stats">Name:</p>
+        <input type="text" name="role" placeholder="Name" readonly th:value="${user.getName()}" /><br/>
+        <p class="stats">Active Status:</p>
+        <input type="text" name="active" placeholder="status" readonly  th:value="${user.isActive()}" /><br/><br/>
+        <a style="text-decoration: none;color: #000000;" th:href="@{/users/{id}(id=${user.getId()})}">Profile Link</a><br/>
+    </div>
+</div>
+</body>
+</html>
+
+<!-- <a th:href="/users/{id}(id=${user.getEmail()})">Profile Link</a><br/> -->
